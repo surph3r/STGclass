@@ -16,28 +16,28 @@ class Challenge3(unittest.TestCase):
         # code to close webdriver
         self.driver.close()
 
-    def test_challenge3_forloop(self):
+    def test_challenge3(self):
         # code for our test steps
         self.driver.get("https://www.copart.com")
         self.assertIn("Copart", self.driver.title)
-        WebDriverWait(self.driver,1)
-        popularSearches = self.driver.find_elements(By.XPATH, '//*[@id="tabTrending"]/div[1]//a')
-        popularSearches[0].get_attribute()
-        print(popularSearches)
-        # getThirdListItem.get_attribute(self.driver,"a")
 
-    def test_challenge3_whileloop(self):
-        # code for our test steps
-        self.driver.get("https://www.copart.com")
-        self.assertIn("Copart", self.driver.title)
-        WebDriverWait(self.driver,1)
-        popularSearches = self.driver.find_elements(By.XPATH, '//*[@id="tabTrending"]/div[1]//a')
-        while(i++):
-            if popularSearches[i]:
-                pass
-            else:
+        # Let's pause for station identification
+        WebDriverWait(self.driver, 1)
+
+        popularSearches = self.driver.find_elements(By.XPATH, '//*[@id="tabTrending"]/div[1]/div[2]//a')
+        numSearches = len(popularSearches)
+
+        print("FOR Loop iteration:")
+        for item in range(numSearches):
+            print(popularSearches[item].text + " - " + popularSearches[item].get_attribute('href'))
+
+        print("\n" + "WHILE Loop iteration:")
+        i = 0
+        while i < numSearches:
+            if i == 20:
                 break
-        # getThirdListItem.get_attribute(self.driver,"a")
+            print(popularSearches[i].text + " - " + popularSearches[i].get_attribute('href'))
+            i+=1
 
 
 if __name__ == '__main__':

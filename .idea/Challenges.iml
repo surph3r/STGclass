@@ -4,7 +4,7 @@
     <content url="file://$MODULE_DIR$/Challenges">
       <excludeFolder url="file://$MODULE_DIR$/Challenges/venv" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.8 (Milestone2-Blackjack)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.8" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="TestRunnerService">
