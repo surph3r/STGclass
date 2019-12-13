@@ -1,9 +1,6 @@
 import unittest
-from libMyFunctions import fibonacci_sequence as fib
-from selenium import webdriver
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-import time
+from num2words import num2words
+from fibonacci import *
 
 
 class Challenge4(unittest.TestCase):
@@ -20,8 +17,15 @@ class Challenge4(unittest.TestCase):
 
     def test_challenge4(self):
         # code for our test steps
-        my_num = fib(9)
-        print('The 9th order Fib Seq is: ' + str(my_num))
+        my_num = 21
+        my_ord_num = num2words(my_num, ordinal=True)
+        my_ord_num = my_ord_num.replace('-', ' ')
+
+        fib_num = fibonacci(my_num)
+        word_salad = num2words(fib_num)
+        word_salad = word_salad.replace('-', ' ')
+
+        print('The ' + my_ord_num + ' Fibonacci number is: ' + str(fib_num) + ' - ' + word_salad)
 
 
 if __name__ == '__main__':
