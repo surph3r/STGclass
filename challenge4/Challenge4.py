@@ -1,6 +1,9 @@
 import unittest
-from num2words import num2words
 from fibonacci import *
+from convertNumToString import *
+
+# I found this built-in lib before writing my own (redundant) function, so I'm also using it, but for other things
+from num2words import num2words
 
 
 class Challenge4(unittest.TestCase):
