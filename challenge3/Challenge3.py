@@ -23,7 +23,7 @@ class Challenge3(unittest.TestCase):
         popularSearches = self.driver.find_elements(By.XPATH, '//*[@id="tabTrending"]/div[1]/div[2]//a')
         numSearches = len(popularSearches)
 
-        print("FOR Loop iteration:")
+        print("My version of the FOR Loop iteration:")
         for item in range(numSearches):
             print(popularSearches[item].text + " - " + popularSearches[item].get_attribute('href'))
 
@@ -33,13 +33,13 @@ class Challenge3(unittest.TestCase):
             print(count.text + ': ' + count.get_attribute("href"))
 
     def test_challenge3_while_loop(self):
-        popularSearches = self.driver.find_elements(By.XPATH, '//*[@id="tabTrending"]/div[1]/div[2]//a')
-        numSearches = len(popularSearches)
+        categories = self.driver.find_elements(By.XPATH, '//*[@ng-if="popularSearches"]/../div[3]//a')
+        numSearches = len(categories)
 
         print("\n" + "WHILE Loop iteration:")
         i = 0
         while i < numSearches:
-            print(popularSearches[i].text + " - " + popularSearches[i].get_attribute('href'))
+            print(categories[i].text + " - " + categories[i].get_attribute('href'))
             i+=1
 
 
