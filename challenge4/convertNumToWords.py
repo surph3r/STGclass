@@ -1,16 +1,23 @@
+one_twenty = ["", "one ", "two ", "three ", "four ", "five ", "six ", "seven ", "eight ", "nine ", "ten ", "eleven ",
+              "twelve ", "thirteen ", "fourteen ", "fifteen ", "sixteen ", "seventeen ", "eighteen ", "nineteen "]
+twenties = ["", "", "twenty ", "thirty ", "forty ", "fifty ", "sixty ", "seventy ", "eighty ", "ninety "]
+thousands = ["", "thousand ", "million ", "billion ", "trillion ", "quadrillion ", "quintillion ", "sextillion ", "septillion ","octillion ", "nonillion ", "decillion "]
+
+
+def breakItUp(num):
+    pass
+
+
 def convertNumToWords(num):
-
-    one_twenty = ["", "one ", "two ", "three ", "four ", "five ", "six ", "seven ", "eight ", "nine ", "ten ", "eleven ",
-            "twelve ", "thirteen ", "fourteen ", "fifteen ", "sixteen ", "seventeen ", "eighteen ", "nineteen "]
-    twenties = ["", "", "twenty ", "thirty ", "forty ", "fifty ", "sixty ", "seventy ", "eighty ", "ninety "]
-    thousands = ["", "thousand ", "million ", "billion ", "trillion ", "quadrillion "]
-
-    if num == 0:
-        return "zero"
-    elif 0 < num < 20:
+    if num < 20:
+        if num == 0:
+            return "zero"
         return one_twenty[num]
+    elif num >= 1000:
+        # break the numbers into groupings of 3 digits xxx,yyy,zzz
+        breakItUp(num)
     else:
         pass
 
-    words = str(num)
-    return words
+    stNumber = str(num)
+    return stNumber
