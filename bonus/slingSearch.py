@@ -10,11 +10,6 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-
-# //*[@id="support-search-input"]
-
-# //*[@id="hc-search-form"]//button
-
 class Challenge3SlingSearch(unittest.TestCase):
 
     def setUp(self):
@@ -30,15 +25,23 @@ class Challenge3SlingSearch(unittest.TestCase):
 
     def test_sling_search(self):
         # code for our test steps
+        searchTerm = "airtv"
         searchField = self.driver.find_element(By.ID, "support-search-input")
         searchField.clear()
         searchField.click()
-        searchField.send_keys("roku")
+        searchField.send_keys(searchTerm)
         btnSearch = self.driver.find_element_by_xpath('//*[@id="hc-search-form"]//button')
         btnSearch.click()
-        element = WebDriverWait(self.driver, 3).until(EC.presence_of_element_located((By.XPATH, "/html/body/div[3]/div/div[2]/div/div[1]/div[2]//a")))
 
-        # TODO: Count the results and output test result
+        try:
+            element = WebDriverWait(self.driver, 3).until(EC.presence_of_element_located((By.XPATH, "/html/body/div[3]/div/div[2]/div/div[1]/div[2]//a")))
+        except:
+            print("There are no search results")
+        else:
+            searchResults = self.driver.find_elements_by_xpath("/html/body/div[3]/div/div[2]/div/div[1]/div[2]//a")
+            print("Here are your " + searchTerm + " search results")
+            for item in searchResults:
+                print(item.text + ": " + item.get_attribute("href"))
 
 
 if __name__ == '__main__':
