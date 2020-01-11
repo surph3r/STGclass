@@ -1,6 +1,6 @@
 import unittest
 from fibonacci import fibonacci as fib
-from convertNumToWords import convertNumToWords as numWords
+from convertNumToWords import convert_num_to_words as num_words
 
 # I found this built-in lib before writing my own (redundant) function, so I'm also using it, but for other things
 from num2words import num2words
