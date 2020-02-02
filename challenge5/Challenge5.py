@@ -1,10 +1,13 @@
 import unittest
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import Select
+
+from Common.TopNavSearch import TopNavSearch as TNS
 
 
 class Challenge5(unittest.TestCase):
@@ -21,13 +24,7 @@ class Challenge5(unittest.TestCase):
         self.driver.close()
 
     def test_challenge5(self):
-        searchField = self.driver.find_element(By.ID, "input-search")
-        searchField.clear()
-        searchField.click()
-        searchField.send_keys("porsche")
-        searchField.send_keys(Keys.ENTER)
-        WebDriverWait(self.driver, 2).until(EC.presence_of_element_located((By.NAME, "serverSideDataTable_length")))
-        searchField.clear()
+        TNS.run_search_copart(self, "porsche")
 
         select_qty = Select(self.driver.find_element(By.NAME, "serverSideDataTable_length"))
         select_qty.select_by_visible_text('100')
