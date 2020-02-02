@@ -1,5 +1,4 @@
 import unittest
-import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -15,7 +14,7 @@ class Challenge5(unittest.TestCase):
         self.driver = webdriver.Chrome("../chromedriver.exe")
         self.driver.get("https://www.copart.com")
         self.assertIn("Copart", self.driver.title)
-        WebDriverWait(self.driver, 1) # give it a sec for stuff to load
+        WebDriverWait(self.driver, 1)  # give it a sec for stuff to load
 
     def tearDown(self):
         # code to close webdriver
@@ -27,14 +26,14 @@ class Challenge5(unittest.TestCase):
         searchField.click()
         searchField.send_keys("porsche")
         searchField.send_keys(Keys.ENTER)
-        WebDriverWait(self.driver,2).until(EC.presence_of_element_located((By.NAME, "serverSideDataTable_length")))
+        WebDriverWait(self.driver, 2).until(EC.presence_of_element_located((By.NAME, "serverSideDataTable_length")))
         searchField.clear()
 
         select_qty = Select(self.driver.find_element(By.NAME, "serverSideDataTable_length"))
         select_qty.select_by_visible_text('100')
         rows = self.driver.find_elements(By.XPATH, '//*[@id="serverSideDataTable"]/tbody/tr')
 
-        while(True):
+        while True:
             rows = self.driver.find_elements(By.XPATH, '//*[@id="serverSideDataTable"]/tbody/tr')
             if len(rows) == 100:
                 break
