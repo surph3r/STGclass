@@ -10,12 +10,11 @@ class TopNavSearch:
         self.driver = driver
 
 
-    def run_search(selfself, query):
-        self.driver.get("https://www.copart.com")
-        self.assertIn("Copart", self.driver.title)
+    def run_search_copart(self, query):
         searchField = self.driver.find_element(By.ID, "input-search")
         searchField.clear()
         searchField.click()
-        # searchField.send_keys("exotics")
+        searchField.send_keys(query)
         searchField.send_keys(Keys.ENTER)
         element = WebDriverWait(self.driver, 3).until(EC.presence_of_element_located((By.ID, "serverSideDataTable")))
+        searchField.clear()
