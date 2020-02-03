@@ -24,29 +24,47 @@ class Challenge5(unittest.TestCase):
         self.driver.close()
 
     def test_challenge5(self):
-        TNS.run_search_copart(self, "porsche")
+        Cls_search = TNS
+        Cls_search.run_search_copart(self, "porsche")
 
         select_qty = Select(self.driver.find_element(By.NAME, "serverSideDataTable_length"))
         select_qty.select_by_visible_text('100')
-        rows = self.driver.find_elements(By.XPATH, '//*[@id="serverSideDataTable"]/tbody/tr')
+        elem_rows = self.driver.find_elements(By.XPATH, '//*[@id="serverSideDataTable"]/tbody/tr')
 
         while True:
-            rows = self.driver.find_elements(By.XPATH, '//*[@id="serverSideDataTable"]/tbody/tr')
-            if len(rows) == 100:
+            elem_rows = self.driver.find_elements(By.XPATH, '//*[@id="serverSideDataTable"]/tbody/tr')
+            if len(elem_rows) == 100:
                 break
 
-        model_counts = {}
-        for i in range(len(rows)):
-            model_path = '//*[@id="serverSideDataTable"]/tbody/tr[' + str(i+1) + ']/td[6]'
-            element = self.driver.find_element(By.XPATH, model_path)
-            if element.text not in model_counts.keys():
-                model_counts[element.text] = 1
-            else:
-                model_counts[element.text] += 1
+        d_model_counts = {}
+        d_damage_types = {
+            'REAR END': 0,
+            'FRONT END': 0,
+            'MINOR DENT/SCRATCHES': 0,
+            'UNDERCARRIAGE': 0,
+            'MISC': 0
+        }
 
-        if sum(model_counts.values()) == len(rows):
-            print("Number of models = " + str(len(model_counts.keys())))
-            print(model_counts)
+        for i in range(len(elem_rows)):
+            s_model_path = '//*[@id="serverSideDataTable"]/tbody/tr[' + str(i+1) + ']/td[6]'
+            elem_model = self.driver.find_element(By.XPATH, s_model_path)
+            if elem_model.text not in d_model_counts.keys():
+                d_model_counts[elem_model.text] = 1
+            else:
+                d_model_counts[elem_model.text] += 1
+
+            s_damage_path = '//*[@id="serverSideDataTable"]/tbody/tr[' + str(i + 1) + ']/td[12]'
+            elem_damage = self.driver.find_element(By.XPATH, s_damage_path)
+            if elem_damage.text in d_damage_types.keys():
+                d_damage_types[elem_damage.text] += 1
+            else:
+                d_damage_types["MISC"] += 1
+
+        if sum(d_model_counts.values()) == len(elem_rows) and sum(d_damage_types.values()) == len(elem_rows):
+            print("Number of models = " + str(len(d_model_counts.keys())))
+            print(d_model_counts)
+            print("Types of damage")
+            print(d_damage_types)
         else:
             print('You have failed this Challenge!')
 
