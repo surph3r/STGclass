@@ -29,11 +29,11 @@ class Challenge5(unittest.TestCase):
 
         select_qty = Select(self.driver.find_element(By.NAME, "serverSideDataTable_length"))
         select_qty.select_by_visible_text('100')
-        elem_rows = self.driver.find_elements(By.XPATH, '//*[@id="serverSideDataTable"]/tbody/tr')
+        wde_rows = self.driver.find_elements(By.XPATH, '//*[@id="serverSideDataTable"]/tbody/tr')
 
         while True:
-            elem_rows = self.driver.find_elements(By.XPATH, '//*[@id="serverSideDataTable"]/tbody/tr')
-            if len(elem_rows) == 100:
+            wde_rows = self.driver.find_elements(By.XPATH, '//*[@id="serverSideDataTable"]/tbody/tr')
+            if len(wde_rows) == 100:
                 break
 
         d_model_counts = {}
@@ -45,22 +45,22 @@ class Challenge5(unittest.TestCase):
             'MISC': 0
         }
 
-        for i in range(len(elem_rows)):
+        for i in range(len(wde_rows)):
             s_model_path = '//*[@id="serverSideDataTable"]/tbody/tr[' + str(i+1) + ']/td[6]'
-            elem_model = self.driver.find_element(By.XPATH, s_model_path)
-            if elem_model.text not in d_model_counts.keys():
-                d_model_counts[elem_model.text] = 1
+            wde_model = self.driver.find_element(By.XPATH, s_model_path)
+            if wde_model.text not in d_model_counts.keys():
+                d_model_counts[wde_model.text] = 1
             else:
-                d_model_counts[elem_model.text] += 1
+                d_model_counts[wde_model.text] += 1
 
             s_damage_path = '//*[@id="serverSideDataTable"]/tbody/tr[' + str(i + 1) + ']/td[12]'
-            elem_damage = self.driver.find_element(By.XPATH, s_damage_path)
-            if elem_damage.text in d_damage_types.keys():
-                d_damage_types[elem_damage.text] += 1
+            wde_damage = self.driver.find_element(By.XPATH, s_damage_path)
+            if wde_damage.text in d_damage_types.keys():
+                d_damage_types[wde_damage.text] += 1
             else:
                 d_damage_types["MISC"] += 1
 
-        if sum(d_model_counts.values()) == len(elem_rows) and sum(d_damage_types.values()) == len(elem_rows):
+        if sum(d_model_counts.values()) == len(wde_rows) and sum(d_damage_types.values()) == len(wde_rows):
             print("Number of models = " + str(len(d_model_counts.keys())))
             print(d_model_counts)
             print("Types of damage")
