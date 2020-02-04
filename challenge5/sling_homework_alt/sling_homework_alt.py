@@ -14,18 +14,20 @@ class Challenge5Bonus(unittest.TestCase):
         self.driver = webdriver.Chrome("../../chromedriver.exe")
         self.driver.get("https://www.sling.com")
         self.assertIn("Sling TV", self.driver.title)
-        WebDriverWait(self.driver, 1) # give it a sec for stuff to load
+        WebDriverWait(self.driver, 5).until(EC.presence_of_all_elements_located) # give it a sec for stuff to load
 
     def tearDown(self):
         # code to close webdriver
         self.driver.close()
 
     def test_sling_for_alt_tags(self):
-        wde_elements = self.driver.find_elements(By.XPATH, '//*')
-        print('Number of page elements = ' + str(len(wde_elements)))
+        wde_elements = self.driver.find_elements(By.XPATH, '/html/body//*')
+        i_num_elements = len(wde_elements)
+        print('Number of page elements = ' + str(i_num_elements))
 
         for e in wde_elements:
             print(e.get_attribute('alt'))
+            print(e.get_property('localName'))
 
 
 if __name__ == '__main__':
